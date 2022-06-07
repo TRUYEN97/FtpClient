@@ -11,10 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.IntStream;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -222,23 +218,4 @@ public class FtpClient {
     private boolean isParentExists(File file) {
         return file.exists() || file.getParentFile().exists();
     }
-
-    public static void main(String[] args) {
-        FtpClient ftpClient1 = new FtpClient("10.90.1.168", 21, "oper", "mfg-oper");
-        FtpClient ftpClient2 = new FtpClient("10.90.1.168", 21, "oper", "mfg-oper");
-        System.out.println(ftpClient1.connect());
-        System.out.println(ftpClient2.connect());
-        System.out.println(ftpClient1.uploadFile("test1.txt", "temp/TE PRO/SQT/sqt1/a123/346/test14.txt"));
-        System.out.println(ftpClient2.uploadFile("test1.txt", "temp/TE PRO/SQT/sqt1/a123/346/test1.txt"));
-        System.out.println(ftpClient1.appendFtpFile("ggg/test15.txt", "temp/TE PRO/SQT/sqt1/a123/346/test14.txt"));
-        System.out.println(ftpClient2.appendFtpFile("ggg/test1.txt", "temp/TE PRO/SQT/sqt1/a123/346/test1.txt"));
-        System.out.println(ftpClient1.renameFtpFile("temp/TE PRO/SQT/sqt1/a123/346/test14.txt", "temp/TE PRO/SQT/sqt1/a123/346/test15.txt"));
-        System.out.println(ftpClient2.renameFtpFile("temp/TE PRO/SQT/sqt1/a123/346/test1.txt", "temp/TE PRO/SQT/sqt1/a123/346/test2.txt"));
-        System.out.println(ftpClient1.downloadFile("temp/TE PRO/SQT/sqt1/a123/346/test15.txt", "ggg/test15.txt"));
-        System.out.println(ftpClient2.downloadFile("temp/TE PRO/SQT/sqt1/a123/346/test2.txt", "ggg/test2.txt"));
-        System.out.println(ftpClient1.disConnect());
-        System.out.println(ftpClient2.disConnect());
-        
-    }
-
 }
