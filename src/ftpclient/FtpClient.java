@@ -82,6 +82,26 @@ public class FtpClient {
 
     }
 
+    public boolean upStringToFTP(String ftpFile, String data) {
+        if (!isConnect()) {
+            return false;
+        }
+        File file = new File(ftpFile);
+        if (!checkFtpDirectoryExists(file.getParent())) {
+            makeFtpDirectory(file.getParent());
+        }
+        try ( OutputStream stream = this.ftpClient.storeFileStream(ftpFile)) {
+            stream.write(data.getBytes());
+            stream.flush();
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            resetConnect();
+        }
+    }
+
     public boolean uploadFile(String localFile, String hostDir, String newFileName) {
         if (newFileName == null || hostDir == null || hostDir.isBlank()) {
             return false;
